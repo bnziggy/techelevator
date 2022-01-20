@@ -1,12 +1,24 @@
 package com.techelevator;
 
 public class Lecture {
+
+    public static void main(String[] args) {
+        Lecture lecture = new Lecture();
+
+        int x;
+
+        x = lecture.returnNumberAfterAddThreeAndAddFive(6,true, true);
+        System.out.println(x);
+
+        String fb = lecture.getFizzBuzz(30);
+        System.out.println(fb);
+    }
     /*
     1. This method is named returnNotOne and it returns an int. Change
     it so that it returns something other than a 1.
     */
     public int returnNotOne() {
-        return 1;
+        return 0;
     }
 
     /*
@@ -14,20 +26,23 @@ public class Lecture {
     it so that it returns something other than a 0.5.
     */
     public double returnNotHalf() {
-        return 0.5;
+
+        return 1.5;
     }
 
     /*
     3. This method needs to return a String. Fix it to return a valid String.
     */
     public String returnName() {
-        return null;
+
+        return "Brett";
     }
 
     /*
     4. This method currently returns an int. Change it so that it returns a double.
     */
-    public int returnDoubleOfTwo() {
+    public double returnDoubleOfTwo() {
+
         return 2;
     }
 
@@ -35,8 +50,9 @@ public class Lecture {
     5. This method should return the language that you're learning. Change
     it so that it does that.
     */
-    public boolean returnNameOfLanguage() {
-        return false;
+    public String returnNameOfLanguage() {
+
+        return "Java";
     }
 
     /*
@@ -45,7 +61,7 @@ public class Lecture {
     */
     public boolean returnTrueFromIf() {
         if (true) {
-            return false;
+            return true;
         }
 
         return false;
@@ -57,7 +73,7 @@ public class Lecture {
     */
     public boolean returnTrueWhenOneEqualsOne() {
         if (1 == 1) {
-            return false;
+            return true;
         }
 
         return false;
@@ -69,11 +85,10 @@ public class Lecture {
     */
     public boolean returnTrueWhenGreaterThanFive(int number) {
         if (number > 5) {
-
+            return true;
         } else {
-
+            return false;
         }
-        return false;
     }
 
     /*
@@ -81,7 +96,7 @@ public class Lecture {
     How can we rewrite exercise 8 to have only one line of code?
     */
     public boolean returnTrueWhenGreaterThanFiveInOneLine(int number) {
-        return false; // What can we put here that returns a boolean that we want?
+        return (number > 5); // What can we put here that returns a boolean that we want?
     }
 
     /*
@@ -92,13 +107,13 @@ public class Lecture {
     */
     public int returnNumberAfterAddThreeAndAddFive(int number, boolean addThree, boolean addFive) {
         if (addThree) {
-            number = number + 1;
+            number = number + 3;
         }
 
         // We can't use an else here. They could both be true, so we have to check each one.
 
         if (addFive) {
-            number += 1;
+            number += 5;
         }
 
         return number;
@@ -108,28 +123,39 @@ public class Lecture {
     11. Write an if statement that returns "Fizz" if the parameter is 3 and returns an empty String for anything else.
     */
     public String returnFizzIfThree(int number) {
-        return "";
+        if (number == 3) {
+            return "Fizz";
+        }
+        else {
+            return "";
+        }
     }
 
     /*
     12. Now write the above using the Ternary operator ?:. If you're not sure what this is, you can Google it.
     */
     public String returnFizzIfThreeUsingTernary(int number) {
-        return "";
+        return (number == 3) ? "Fizz" : "";
     }
 
     /*
     13. Write an if/else statement that returns "Fizz" if the parameter is 3, "Buzz" if the parameter is 5 and an empty String for anything else.
     */
     public String returnFizzOrBuzzOrNothing(int number) {
-        return "";
+        if (number == 3) {
+            return "Fizz";
+        } else if (number == 5) {
+            return "Buzz";
+        } else {
+            return "";
+        }
     }
 
     /*
     14. Write an if statement that checks if the parameter number is either equal to or greater than 18. Return "Adult" if it is or "Minor" if it's not.
     */
     public String returnAdultOrMinor(int number) {
-        if (true) {
+        if (number >= 18) {
             return "Adult";
         } else {
             return "Minor";
@@ -140,24 +166,40 @@ public class Lecture {
     15. Now, do it again with a different boolean opeation.
     */
     public String returnAdultOrMinorAgain(int number) {
-        if (true) {
-            return "Adult";
-        } else {
-            return "Minor";
-        }
+        return (number >= 18) ? "Adult" : "Minor";
+        /*or do:
+        if (number == 18 || number > 18) {return "adult"}
+         */
     }
 
     /*
     16. Return as above, but also return "Teen" if the number is between 13 and 17 inclusive.
     */
     public String returnAdultOrMinorOrTeen(int number) {
-        if (true) {
+        if (number >= 18) {
             return "Adult";
-        } else if (true) {
+        } else if (number >= 13 && number <= 17) {
             return "Teen";
         } else {
             return "Minor";
         }
     }
+    /*
+    Fizz Buzz: Return "Fizz" if divisible by 3, "Buzz" if divisible by 5, "FizzBuzz" if both, otherwise empty string
+     */
+    public String getFizzBuzz(int number) {
+        boolean isDivByFive = number % 5 == 0;
 
+        boolean isDivByThree = number % 3 == 0;
+
+        if (isDivByThree && isDivByFive) {
+            return "FizzBuzz";
+        } else if (isDivByFive) {
+            return "Buzz";
+        } else if (isDivByThree) {
+            return "Fizz";
+        } else {
+            return "";
+        }
+    }
 }
