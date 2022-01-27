@@ -2,6 +2,7 @@ package com.techelevator;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Exercises {
 
@@ -25,16 +26,32 @@ public class Exercises {
 	 * Dog -> Pack
 	 * Crocodile -> Float
 	 *
-	 * animalGroupName("giraffe") → "Tower"
-	 * animalGroupName("") -> "unknown"
-	 * animalGroupName("walrus") -> "unknown"
-	 * animalGroupName("Rhino") -> "Crash"
-	 * animalGroupName("rhino") -> "Crash"
-	 * animalGroupName("elephants") -> "unknown"
+	 c
 	 *
 	 */
-	public String animalGroupName(String animalName) {
-		return null;
+	public String animalGroupName(String animalName) {	//manually input all info
+		Map<String, String> animalGroups = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+
+		animalGroups.put("Rhino", "Crash");
+		animalGroups.put("Giraffe", "Tower");
+		animalGroups.put("Elephant", "Herd");
+		animalGroups.put("Lion", "Pride");
+		animalGroups.put("Crow", "Murder");
+		animalGroups.put("Pigeon", "Kit");
+		animalGroups.put("Flamingo", "Pat");
+		animalGroups.put("Deer", "Herd");
+		animalGroups.put("Dog", "Pack");
+		animalGroups.put("Crocodile", "Float");
+
+		if (animalName == null) {
+			return "unknown";
+		}
+
+		if (!animalGroups.containsKey(animalName)) {
+			return "unknown";
+		}
+
+		return animalGroups.get(animalName);
 	}
 
 	/*
@@ -60,7 +77,23 @@ public class Exercises {
 	 *
 	 */
 	public double isItOnSale(String itemNumber) {
-		return -1.0;
+		Map<String, Double> items = new HashMap<>();
+
+		items.put("KITCHEN4001", 0.20);
+		items.put("GARAGE1070", 0.15);
+		items.put("LIVINGROOM", 0.10);
+		items.put("BEDROOM3434", 0.60);
+		items.put("BATH0073", 0.15);
+
+		if (itemNumber == null) {
+			return 0.0;
+		}
+
+		if (items.containsKey(itemNumber.toUpperCase())) {
+			return items.get(itemNumber.toUpperCase());
+		}
+		return 0.0;
+
 	}
 
 	/*
@@ -74,7 +107,24 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> robPeterToPayPaul(Map<String, Integer> peterPaul) {
-		return null;
+		int peterAmount = peterPaul.get("Peter");
+		int paulAmount = peterPaul.get("Paul");
+
+		if (peterAmount > 0 && paulAmount < 1000) {
+			if (peterAmount % 2 != 0) {
+				peterAmount = peterAmount / 2;
+				paulAmount = paulAmount + peterAmount;
+				peterAmount++;
+			}
+			else if (peterAmount > 0 && paulAmount < 1000) {
+				peterAmount = peterAmount / 2;
+				paulAmount = paulAmount + peterAmount;
+			}
+		}
+
+		peterPaul.put("Peter", peterAmount);
+		peterPaul.put("Paul", paulAmount);
+		return peterPaul;
 	}
 
 	/*
@@ -85,9 +135,23 @@ public class Exercises {
 	 * peterPaulPartnership({"Peter": 50000, "Paul": 100000}) → {"Peter": 37500, "Paul": 75000, "PeterPaulPartnership": 37500}
 	 * peterPaulPartnership({"Peter": 3333, "Paul": 1234567890}) → {"Peter": 3333, "Paul": 1234567890}
 	 *
+	 * Note, monetary amounts are specified in cents: penny=1, nickel=5, ... $1=100, ... $10=1000, ...
 	 */
 	public Map<String, Integer> peterPaulPartnership(Map<String, Integer> peterPaul) {
-		return null;
+		double peterAmount = peterPaul.get("Peter");
+		double paulAmount = peterPaul.get("Paul");
+
+		if (peterAmount >= 5000 && paulAmount >= 10000) {
+			double contribution = (peterAmount * 0.25) + (paulAmount * 0.25);
+			peterAmount = peterAmount * 0.75;
+			paulAmount = paulAmount * 0.75;
+
+			peterPaul.put("Peter", (int)peterAmount);
+			peterPaul.put("Paul", (int)paulAmount);
+			peterPaul.put("PeterPaulPartnership", (int)contribution);
+			return peterPaul;
+		}
+		return peterPaul;
 	}
 
 	/*
@@ -99,7 +163,12 @@ public class Exercises {
 	 * beginningAndEnding(["muddy", "good", "moat", "good", "night"]) → {"g": "d", "m": "t", "n": "t"}
 	 */
 	public Map<String, String> beginningAndEnding(String[] words) {
-		return null;
+		Map<String, String> begAndEnd = new HashMap<>();
+
+		for (String word : words) {
+			begAndEnd.put(word.substring(0, 1), word.substring(word.length() - 1));
+		}
+		return begAndEnd;
 	}
 
 	/*

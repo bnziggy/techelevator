@@ -27,6 +27,16 @@ public class Tutorial {
         for (Map.Entry<String, String> project : projects.entrySet()) {
             System.out.println("The key " + project.getKey() + " is linked to the value " + project.getValue());
         }
+
+        //
+        // Auto-boxing and nulls
+        //
+        Map<String, Boolean> swJedis = new HashMap<String, Boolean>();
+        swJedis.put("Luke", true);
+
+        Boolean isLandoJedi = swJedis.get("Lando"); //changing to boolean does not work, lower case is
+//                                                    strictly T/F, cannot be null
+        System.out.println(isLandoJedi);
     }
 
 }
