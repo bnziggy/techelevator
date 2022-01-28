@@ -184,7 +184,19 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> wordCount(String[] words) {
-		return null;
+		Map<String, Integer> wordsCounted = new HashMap<>();
+
+		for (String word : words) {
+			if (wordsCounted.containsKey(word)) {
+				int count = wordsCounted.get(word);
+				count++;
+				wordsCounted.put(word, count);
+			}
+			else {
+				wordsCounted.put(word, 1);
+			}
+		}
+		return wordsCounted;
 	}
 
 	/*
@@ -199,7 +211,19 @@ public class Exercises {
 	 *
 	 */
 	public Map<Integer, Integer> integerCount(int[] ints) {
-		return null;
+		Map<Integer, Integer> intCounts = new HashMap<>();
+
+		for (int number : ints) {
+			if (intCounts.containsKey(number)) {
+				int count = intCounts.get(number);
+				count++;
+				intCounts.put(number, count);
+			}
+			else {
+				intCounts.put(number, 1);
+			}
+		}
+		return intCounts;
 	}
 
 	/*
@@ -212,7 +236,21 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Boolean> wordMultiple(String[] words) {
-		return null;
+		Map<String, Boolean> multiples = new HashMap<>();
+
+		for (String word : words) {
+			if (multiples.containsKey(word)) {
+				multiples.put(word, true);
+			}
+			else {
+				multiples.put(word, false);
+			}
+
+			/*if (multiples.get(word) == true) {
+				return multiples;
+			}*/
+		}
+		return multiples;
 	}
 
 	/*
@@ -227,7 +265,22 @@ public class Exercises {
 	 */
 	public Map<String, Integer> consolidateInventory(Map<String, Integer> mainWarehouse,
 			Map<String, Integer> remoteWarehouse) {
-		return null;
+
+		Map<String, Integer> totalInventory = new HashMap<>();
+
+		for (String main : mainWarehouse.keySet()) {
+			totalInventory.put(main, mainWarehouse.get(main));
+		}
+
+		for (String remote : remoteWarehouse.keySet()) {
+			if (totalInventory.containsKey(remote)) {
+				totalInventory.put(remote, totalInventory.get(remote) + remoteWarehouse.get(remote));
+			}
+			else {
+				totalInventory.put(remote, remoteWarehouse.get(remote));
+			}
+		}
+		return totalInventory;
 	}
 
 	/*
@@ -246,7 +299,23 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> last2Revisited(String[] words) {
-		return null;
+		Map<String, Integer> revistedTwo = new HashMap<>();
+
+		for (String word : words) {
+			if (word.length() <= 2) {
+				revistedTwo.put(word, 0);
+			}
+			String lastTwo = word.substring(word.length() - 2);
+			int count = 0;
+
+			for (int i = 0; i < word.length() - 2; i++) {
+				if (word.substring(i, i + 2).equals(lastTwo)) {
+					count++;
+					revistedTwo.put(word, count);
+				}
+			}
+		}
+		return revistedTwo;
 	}
 
 }
