@@ -4,6 +4,9 @@ public class Application {
 
     public static void main(String[] args) {
 
+        Bid dummyBid = new Bid("Brett Ziegler", 50);
+        System.out.println(dummyBid.toString());
+
         // Create a new general auction
         System.out.println("Starting a general auction");
         System.out.println("-----------------");
@@ -17,5 +20,16 @@ public class Application {
         //....
         // This might go on until the auction runs out of time or hits a max # of bids
 
+        System.out.println("The winning bid was " + generalAuction.getHighBid().toString());
+
+        System.out.println();
+        System.out.println();
+
+        ReserveAuction reserveAuction = new ReserveAuction("TE Paperweight", 100);
+
+        reserveAuction.placeBid(new Bid("Mike", 25));
+        reserveAuction.placeBid(new Bid("Monika", 110));
+
+        System.out.println("The winning reserve auction bid: " + reserveAuction.getHighBid());
     }
 }
