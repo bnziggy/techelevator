@@ -5,8 +5,10 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class RTNValidator {
-	
+
+	//PNC routing number 									  0  4  1  0  0  0  1  2  4
 	private static final int[] CHECKSUM_WEIGHTS = new int[] { 3, 7, 1, 3, 7, 1, 3, 7, 1 };
+	//														  0 28  1  0  0  0  3 14  4   Sum = 50. 50 mod 10 = 0 - Valid
 
 	public static void main(String[] args) throws FileNotFoundException {
 
@@ -16,12 +18,27 @@ public class RTNValidator {
 		try(Scanner fileScanner = new Scanner(inputFile)) {
 			while(fileScanner.hasNextLine()) {
 				String line = fileScanner.nextLine();
-				String rtn = line.substring(0, 9);
-				
-				if(checksumIsValid(rtn) == false) {
+				if (line.length() < 9) {
 					System.out.println(line);
 				}
+				else {
+					String rtn = line.substring(0, 9);
+
+					if (checksumIsValid(rtn) == false) {
+						System.out.println(line);
+					}
+				}
 			}
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		}
+
+		String quizQuestion = "What is 2 + 2?|4*|2|9|who knows"; // <-- pipe is seperator, star is correct answer
+
+		String[] quizParts = quizQuestion.split("\\|");
+
+		for (String quizPart : quizParts) {
+			System.out.println(quizPart);
 		}
 	}
 
@@ -39,22 +56,26 @@ public class RTNValidator {
 		String path = userInput.nextLine();
 		
 		File inputFile = new File(path);
-		if(inputFile.exists() == false) { // checks for the existence of a file
+/*		if(inputFile.exists() == false) { // checks for the existence of a file
 			System.out.println(path+" does not exist");
 			System.exit(1); // Ends the program
 		} else if(inputFile.isFile() == false) {
 			System.out.println(path+" is not a file");
 			System.exit(1); // Ends the program
-		}
+		}*/
 		return inputFile;
 	}
 
 	private static boolean checksumIsValid(String routingNumber) {
-		int checksum = 0;
-		for(int i = 0; i < 9; i++) {
-			int digit = Integer.parseInt(routingNumber.substring(i, i+1));
-			checksum += digit * CHECKSUM_WEIGHTS[i];
+		try {
+			int checksum = 0;
+			for (int i = 0; i < 9; i++) {
+				int digit = Integer.parseInt(routingNumber.substring(i, i + 1));
+				checksum += digit * CHECKSUM_WEIGHTS[i];
+			}
+			return checksum % 10 == 0;
+		} catch (NumberFormatException e) {
+			return false;
 		}
-		return checksum % 10 == 0;
 	}
 }

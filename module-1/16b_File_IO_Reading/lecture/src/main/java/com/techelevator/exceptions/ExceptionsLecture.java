@@ -5,6 +5,11 @@ import java.util.Scanner;
 public class ExceptionsLecture {
 
 	public static void main(String[] args) {
+
+//		String nullStr = null;
+//		nullStr.length(); <-- Unhandled exception
+
+
 		Scanner scan = new Scanner(System.in);
 		
 		/* By default, when an Exception is thrown, it will "bubble up" through the call stack until
@@ -33,8 +38,13 @@ public class ExceptionsLecture {
 			System.out.println("Hey ya'll, watch this!");
 			doSomethingDangerous();  // throws an ArrayIndexOutOfBoundsException
 			System.out.println("See, I told you nothing would go wrong!");
-		} catch(ArrayIndexOutOfBoundsException e) {  
+		} catch(ArrayIndexOutOfBoundsException | NullPointerException e) {
 			System.out.println("Call the Darwin Awards...");
+		}// catch(NullPointerException e) {
+//			System.out.println("Caught an NPE");
+//		}
+		catch(Exception e) { // Typically only used as a final safety net
+			System.out.println("Caught something");
 		}
 		
 		System.out.println();
@@ -88,7 +98,7 @@ public class ExceptionsLecture {
 		 * method calls that lead up to the Exception being thrown. */
 		try {
 			doSomethingDangerous(); // throws an ArrayIndexOutOfBoundsException
-		} catch (ArrayIndexOutOfBoundsException e) {
+		} catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
 			System.out.println("AN EXAMPLE OF A STACKTRACE:");
 			e.printStackTrace(); // will print the Exception stacktrace to the terminal
 		}
@@ -104,7 +114,9 @@ public class ExceptionsLecture {
 		
 		/* The throw statements below demonstrate how to throw a new Exception. */
 		if(nights < 1) {
-			throw new IllegalArgumentException("Minimum number of nights is 1");
+			//throw new IllegalArgumentException("Minimum number of nights is 1"); <-- Same as both lines below
+			IllegalArgumentException e = new IllegalArgumentException("Minimum number of nights is 1");
+			throw e;
 		} else if(numberOfGuests < 1) {
 			throw new IllegalArgumentException("Minimum number of guests is 1");
 		}
@@ -132,11 +144,18 @@ public class ExceptionsLecture {
 	}
 
 	private static void doSomethingDangerous() {
-		int[] numbers = new int[5];
-		for(int i = 0; i < 10; i++) {
-			numbers[i] = i;  // this line will throw an Exception once i reaches 5
+		try {
+			int[] numbers = new int[5];
+			for (int i = 0; i < 10; i++) {
+				numbers[i] = i;  // this line will throw an Exception once i reaches 5
+			}
+			System.out.println("Look Ma, no Exceptions!");  // This line will not execute because an Exception will be thrown inside the for loop
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Oops. " + e.getMessage());
 		}
-		System.out.println("Look Ma, no Exceptions!");  // This line will not execute because an Exception will be thrown inside the for loop
+
+		String nullStr = null;
+		nullStr.length();
 	}
 
 }
