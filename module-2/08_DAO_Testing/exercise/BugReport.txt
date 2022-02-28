@@ -1,43 +1,43 @@
 Bug 1
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: getTimesheetsByProjectId_returns_list_of_all_timesheets_for_project()
 
-Expected output:
+Expected output: 2
 
-Actual output:
+Actual output: 1
 
-How did you fix this bug?
+How did you fix this bug? getByProjectId - WHERE statement in sql was changed to project_id
 
 
 Bug 2
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: getTimesheetsByEmployeeId_returns_list_of_all_timesheets_for_employee()
 
-Expected output:
+Expected output: 2
 
-Actual output:
+Actual output: 1
 
-How did you fix this bug?
+How did you fix this bug? getbyEmployeeId - changed if loop to while loop, removed ORDER BY statement
 
 
 Bug 3
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: getBillableHours_returns_correct_total
 
 Expected output:
 
 Actual output:
 
-How did you fix this bug?
+How did you fix this bug? changed sql to WHERE billable = true
 
 
 Bug 4
 -----
-Test that demonstrates problem:
+Test that demonstrates problem: updated_timesheet_has_expected_values_when_retrieved
 
 Expected output:
 
 Actual output:
 
-How did you fix this bug?
+How did you fix this bug? changed sql to SET billable = ? WHERE updated.timesheet.isbillable
 
