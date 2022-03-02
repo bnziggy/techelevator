@@ -17,18 +17,53 @@ public class AuctionService {
 
 
     public Auction add(Auction newAuction) {
-        // place code here
-        return null;
+        try {
+            final HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<Auction> content = new HttpEntity<>(newAuction, headers);
+
+            return this.restTemplate.postForObject(API_BASE_URL, content, Auction.class);
+        } catch (ResourceAccessException ae) {
+            BasicLogger.log(ae.getMessage());
+            return newAuction = null;
+        } catch (RestClientResponseException cre) {
+            BasicLogger.log(cre.getMessage());
+            return newAuction = null;
+        }
+
     }
 
     public boolean update(Auction updatedAuction) {
-        // place code here
-        return false;
+        final String url = API_BASE_URL + updatedAuction.getId();
+
+        try {
+            final HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<Auction> content = new HttpEntity<>(updatedAuction, headers);
+
+            this.restTemplate.put(url, content);
+            return true;
+        } catch (ResourceAccessException ae) {
+            BasicLogger.log(ae.getMessage());
+            return false;
+        } catch (RestClientResponseException cre) {
+            BasicLogger.log(cre.getMessage());
+            return false;
+        }
     }
 
     public boolean delete(int auctionId) {
-        // place code here
-        return false;
+        final String url = API_BASE_URL + auctionId;
+        try {
+            this.restTemplate.delete(url);
+            return true;
+        } catch (ResourceAccessException ae) {
+            BasicLogger.log(ae.getMessage());
+            return false;
+        } catch (RestClientResponseException cre) {
+            BasicLogger.log(cre.getMessage());
+            return false;
+        }
     }
 
     public Auction[] getAllAuctions() {
