@@ -15,3 +15,67 @@ ul {
   margin: 0;
   padding: 0;
 }
+
+aside {
+  position: fixed;
+  border-right: 1px solid rgba(0, 173, 238, 0.4);
+  height: 100%;
+  width: 200px;
+}
+
+aside > img {
+  height: 120px;
+  margin: auto;
+  display: block;
+}
+
+main {
+  margin-left: 200px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+aside > nav > ul > li {
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 173, 238, 0.4);
+  width: 90%;
+  list-style: none;
+  margin: auto;
+  padding-bottom: 5px;
+}
+aside > nav > ul > li:first-child {
+  text-decoration: underline;
+}
+
+aside > nav > ul > li > a {
+  font-weight: bold;
+  color: #00ADEE;
+  text-decoration: none;
+}
+
+header img {
+  height: 100px;
+  margin-bottom: 1px;
+}
+
+main img {
+  width: 100%;
+}
+
+section > div {
+  width: 33%;
+  display: inline-block;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+section > div > h2 {
+  color: #8CC36F;
+}
+
+section > div > h2 > i {
+  margin-right: 5px;
+}
+section > div#what-we-do, section > div#our-work {
+  border-right: 1px solid rgba(170, 239, 135, 0.8);
+}
