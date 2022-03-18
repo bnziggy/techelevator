@@ -50,3 +50,117 @@ header img {
 #student-picture img{
     border-radius: 50%;
 }
+
+main#main-grid {
+    display: grid;
+    row-gap: 20px;
+    column-gap: 50px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+        "headline   headline   picture"
+        "quote      quote      picture"
+        "profile    profile    contact"
+        "experience experience experience";
+    align-items: center;
+}
+
+main > h1#headline {
+    grid-area: headline
+}
+
+main > div#student-picture {
+    grid-area: picture;
+    text-align: center;
+    justify-self: center;
+}
+
+main > div#student-quote {
+    grid-area: quote;
+}
+
+main > div#student-profile {
+    grid-area: profile;
+}
+
+main > div#student-contact {
+    grid-area: contact;
+    text-align: center;
+    justify-self: center;
+}
+
+main > div#experience-grid {
+    grid-area: experience;
+}
+
+main > div#experience-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 20px;
+    column-gap: 50px;
+    grid-template-areas: 
+        "code     code"
+        "database database"
+        "web      design";
+}
+
+main > div#experience-grid > div#experience-code {
+    grid-area: code;
+}
+
+main > div#experience-grid > div#experience-database {
+    grid-area: database;
+}
+
+main > div#experience-grid > div#experience-web {
+    grid-area: web;
+}
+
+main > div#experience-grid > div#experience-design {
+    grid-area: design;
+}
+
+@media only screen and (max-width: 1024) {
+    #main-grid {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 20px;
+        column-gap: 35px;
+        grid-template-areas: 
+            "headline   headline"
+            "quote      picture"
+            "quote      contact"
+            "profile    profile"
+            "experience experience";
+    }
+
+    #experience-grid {
+        row-gap: 20px;
+        column-gap: 20px;
+        grid-template-areas: 
+            "code     web"
+            "database design";
+            grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    #main-grid {
+        row-gap: 1px;
+        column-gap: 1px;
+        grid-template-areas: 
+        "picture"
+        "contact"
+        "quote"
+        "profile"
+        "experience";
+        grid-template-columns: 1fr;
+    }
+
+    #experience-grid {
+        grid-template-areas: 
+        "code"
+        "web"
+        "database"
+        "design";
+        grid-template-columns: 1fr;
+    }
+}
