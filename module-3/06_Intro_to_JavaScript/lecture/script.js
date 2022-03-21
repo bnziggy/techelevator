@@ -10,8 +10,24 @@
  */
 function variables() {
   // Declares a variable where the value cannot be changed
+  const PI = 3.14159;
+
   // Declares a variable those value can be changed
+  let greeting = 'Hello'; // Can also use double quotes
+  greeting = 'Howdy';
+
+  console.log(`typeof greeting is ${typeof greeting}`);
+
+  greeting = 5;
+
+  console.log(`typeof greeting is ${typeof greeting}`);
+
   // Declares a variable that will always be an array
+  const planets = ['Mercury'];
+  console.log(`typeof planets is ${typeof planets}`);
+  planets.push('Venus');
+
+  return "done";
 }
 
 /**
@@ -24,6 +40,8 @@ function printParameters(param1, param2) {
   console.log(`The value of param1 is ${param1}`);
   console.log(`The value of param2 is ${param2}`);
 }
+
+//printParameters('Runs', 'when read');
 
 /**
  * Compares two values x and y.
@@ -70,15 +88,48 @@ function objects() {
       "Milton Waddams",
       "Samir Nagheenanajar",
       "Michael Bolton"
-    ]
+    ],
+    address: {
+      lineOne: "123 Main St",
+      state: "Kansas"
+    }
   };
 
   // Log the object
+  console.log(person);
+  console.table(person);
+
+  console.log(`person's state is ${person.address.state}`);
+  console.log(`The first employee is ${person.employees[0]}`);
 
   // Log the first and last name
 
   // Log each employee
+
+  console.log(`the employees are
+  ${person.employees}`);
+
+  for (let i = 0; i < person.employees.length; i++) {
+    console.log(`Employee #${i + 1}: ${person.employees[i]}`);
+  }
+
+  // For-each loop
+for (let employee of person.employees) {
+  console.log(employee);
 }
+
+console.log(`
+
+
+`)
+
+// Loop with "of"
+for (let property in person) {
+  console.log(`The value of property ${property} is ${person[property]}`);
+}
+}
+
+
 
 /*
 ########################
@@ -138,4 +189,10 @@ function stringFunctions(value) {
         - trim()
         - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
     */
+}
+
+function arrayFunctions() {
+  let daysOfWeek = ['Monday'];
+
+  daysOfWeek.push('Tuesday'); // Adds an entry onto the end
 }
