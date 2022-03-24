@@ -179,3 +179,20 @@ function getFullAddressesOfProperties(properties) {
  *
  * Read the tests to verify you have the correct behavior.
  */
+/**
+ * 
+ * Uses array to add all values in sub array.
+ * Zero will be return if no elements to array or no parameters used
+ * 
+ * @param {array} subArray containing numbers to add, if empty return 0
+ * @returns {number} sum of numbers
+ */
+
+function getSumOfSubArrayValues(subArray = []) {
+    return subArray.reduce( (sum, array) => {
+        return (sum + array.reduce( (sum, number) => {
+            return sum + number;
+        }, 0)
+        );
+    }, 0);
+}
