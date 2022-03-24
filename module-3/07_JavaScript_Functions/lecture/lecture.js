@@ -27,6 +27,9 @@ function printToConsole(value) {
  * @param {number} firstParameter the first parameter to multiply
  * @param {number} secondParameter the second parameter to multiply
  */
+function multiplyTogether(firstParameter, secondParameter) {
+  return firstParameter * secondParameter;
+}
 
 /**
  * This version makes sure that no parameters are ever missing. If
@@ -39,8 +42,10 @@ function printToConsole(value) {
  * @param {number} [secondParameter=0] the second parameter to multiply
  */
 
+function multiplyNoUndefined(firstParameter = 0, secondParameter = 1, thirdParameter = 1, fourthParameter = 1) {
+  return firstParameter * secondParameter * thirdParameter * fourthParameter;
+}
 
- 
 /**
  * Functions can return earlier before the end of the function. This could be useful
  * in circumstances where you may not need to perform additional instructions or have to
@@ -92,6 +97,24 @@ function createSentenceFromUser(name, age, listOfQuirks = [], separator = ', ') 
   return description + listOfQuirks.join(separator);
 }
 
+
+function printValue(value, index, origArray) {
+  console.log(`In printValue at index ${index} with value ${value} or array ${origArray}`);
+}
+
+function printAllValues(arrToPrint) {
+  arrToPrint.forEach(printValue);
+}
+
+function printAllValuesV2(arrToPrint) {
+  arrToPrint.forEach((value, index, origArray) => {
+    //console.log(value);
+    console.log(`In an anon func at index ${index} with value ${value} or array ${origArray}`);
+  });
+
+  return "Done";
+}
+
 /**
  * Takes an array and, using the power of anonymous functions, generates
  * their sum.
@@ -100,7 +123,11 @@ function createSentenceFromUser(name, age, listOfQuirks = [], separator = ', ') 
  * @returns {number} sum of all the numbers
  */
 function sumAllNumbers(numbersToSum) {
-  return numbersToSum.reduce();
+  return numbersToSum.reduce((prevVal, curVal) => {
+    let newVal = prevVal + curVal;
+    console.log(`prevVal : ${prevVal} curVal : ${curVal} newVal : ${newVal}`);
+    return newVal;
+  });
 }
 
 /**
@@ -111,4 +138,48 @@ function sumAllNumbers(numbersToSum) {
  * @returns {number[]} a new array with only those numbers that are
  *   multiples of 3
  */
-function allDivisibleByThree(numbersToFilter) {}
+function allDivisibleByThreeV2(numbersToFilter) {
+
+  return numbersToFilter.filter((value) => {
+    return value % 3 === 0;
+  })
+}
+
+function allDivisibleByThreeV3(numbersToFilter) {
+
+  return numbersToFilter.filter(value => {
+    return value % 3 === 0;
+  })
+}
+
+function allDivisibleByThree(numbersToFilter) {
+
+  let result = numbersToFilter.filter(value => value % 3 === 0);
+
+  return result;
+}
+
+function addEvenNumbers(arrayToSum) {
+  return arrayToSum.reduce((prevVal, curVal) => {
+    console.log(`prevVal: ${prevVal} curVal: ${curVal}`);
+    if (curVal % 2 === 0) {
+      return prevVal + curVal;
+    } else {
+      return prevVal;
+    }
+  }, 0);
+}
+
+function squareNumbers(numsToSquare) {
+  return numsToSquare.map(x => x * x);
+}
+
+function sumAllValues(param1, param2) {
+  let sum = 0;
+
+  for (let param of arguments) {
+    sum += param;
+  }
+
+  return sum;
+}
