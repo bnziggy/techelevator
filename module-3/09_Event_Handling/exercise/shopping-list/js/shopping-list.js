@@ -36,3 +36,18 @@ function displayGroceries() {
     ul.appendChild(li);
   });
 }
+
+
+/**
+ * 
+ * DOM load and listen for events
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  setPageTitle();
+  displayGroceries();
+
+  function markCompleted() {
+    const listItems = document.querySelector('ul');
+    const items = Array.from(listItems.children);
+  }
+})

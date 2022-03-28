@@ -20,7 +20,7 @@ function setPageTitle() {
  * This function will loop over the array of groceries that was set above and add them to the DOM.
  */
 function displayGroceries() {
-  let list = document.getElementById("groceries");
+  let list = document.getElementById('groceries');
 
   for (let i = 0; i < groceries.length; i++) {
     let itemList = document.createElement('li');
