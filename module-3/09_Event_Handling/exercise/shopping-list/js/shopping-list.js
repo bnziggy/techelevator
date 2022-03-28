@@ -36,3 +36,15 @@ function displayGroceries() {
     ul.appendChild(li);
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  displayGroceries();
+
+  // Mark all complete
+  let list = document.querySelector('ul');
+  let items = list.querySelector('li');
+  items.forEach((item) => {
+    item.classList.add('completed');
+    item.querySelector('i').classList.add('completed');
+  });
+})
