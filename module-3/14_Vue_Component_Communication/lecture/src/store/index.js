@@ -45,7 +45,23 @@ export default new Vuex.Store({
   },
   mutations: {
     ADD_REVIEW(state, review) {
+      // Find biggest id in state.reviews
+      let largest = state.reviews.reduce((largestFound, curReview) => {
+        return Math.max(largestFound, curReview.id);
+      }, 0);
+      // set review.id to largest + 1
+      review.id = largest + 1;
+
       state.reviews.unshift(review);
+    },
+    DELETE_REVIEW(state, id) {
+      let reviewsToKeep = [];
+      state.reviews.forEach(review => {
+        if (review.id !== id) {
+          reviewsToKeep.push(review);
+        }
+      });
+      state.reviews = reviewsToKeep;
     },
     UPDATE_FILTER(state, filter) {
       state.filter = filter;
