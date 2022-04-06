@@ -59,12 +59,44 @@ function displayReview(review) {
 
 // LECTURE STARTS HERE ---------------------------------------------------------------
 
+document.addEventListener('DOMContentLoaded', () => {
 // Set the product reviews page title.
 setPageTitle();
 // Set the product reviews page description.
 setPageDescription();
 // Display all of the product reviews on our page.
 displayReviews();
+
+let descPara = document.querySelector('.description');
+descPara.addEventListener('click', () => {
+  console.log("Clicked on description");
+  toggleDescriptionEdit(descPara);
+});
+
+let inputDesc = document.getElementById('inputDesc');
+inputDesc.addEventListener('keyup', (event) => {
+  console.log(`Got keyup of ${event.key}`);
+  if (event.key === 'Enter') {
+    exitDescriptionEdit(inputDesc, true);
+  } else if (event.key === 'Escape') {
+    exitDescriptionEdit(inputDesc, false);
+  }
+});
+
+inputDesc.addEventListener('mouseleave', () => {
+  exitDescriptionEdit(inputDesc, false);
+})
+
+let reviewBtn = document.getElementById('btnToggleForm');
+reviewBtn.addEventListener('click', showHideForm);
+
+let saveReviewBtn = document.getElementById('btnSaveReview');
+saveReviewBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  saveReview();
+})
+});
+
 
 /**
  * Hide the description and show the text box.
@@ -119,7 +151,7 @@ function showHideForm() {
  */
 function resetFormValues() {
   const form = document.querySelector('form');
-  const inputs = form.querySelectorAll('input');
+  const inputs = form.querySelectorAll('input, textarea');
   inputs.forEach((input) => {
     input.value = '';
   });
@@ -130,4 +162,19 @@ function resetFormValues() {
 /**
  * Save the review that was added using the add review form.
  */
-function saveReview() {}
+function saveReview() {
+  let reviewer = document.getElementById('name');
+  let title = document.getElementById('title');
+  let rating = document.getElementById('rating');
+  let review = document.getElementById('review');
+
+  let userReview = {};
+  userReview.reviewer = reviewer.value;
+  userReview.title = title.value;
+  userReview.rating = rating.value;
+  userReview.review = review.value;
+
+  reviews.push(userReview);
+  displayReview(userReview);
+  showHideForm();
+}
