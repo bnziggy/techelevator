@@ -1,6 +1,7 @@
 <template>
   <form v-on:submit.prevent>
     <div class="field">
+      <div class="status-message error" v-show="errorMsg !== ''">{{ errorMsg }}</div>
       <label for="title">Title</label>
       <input type="text" v-model="title" />
     </div>
@@ -18,12 +19,30 @@ export default {
   props: ["topicID"],
   data() {
     return {
-      title: ""
+      title: "",
+      errorMsg: ''
     };
   },
   methods: {
     updateTopic() {
       const topic = { id: this.topicID, title: this.title };
+      topicService.edit(topic.id, topic)
+      .then(response => {
+        if (response.status === 200) {
+          this.$router.push('/');
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          this.errorMsg = "Error adding. Response: " + error.response.statusText;
+        }
+        else if (error.request) {
+          this.errorMsg = "Error adding. Unreachable server."
+        }
+        else {
+          this.errorMsg = "Error addding. Could not create"
+        }
+      })
       // call topic service update method
     }
   },

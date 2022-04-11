@@ -1,6 +1,7 @@
 <template>
   <form v-on:submit.prevent>
     <div class="field">
+      <div class="status-message error" v-show="errorMsg !== ''">{{ errorMsg }}</div>
       <label for="title">Title</label>
       <input type="text" v-model="topic.title" />
     </div>
@@ -20,11 +21,30 @@ export default {
       topic: {
         id: Math.floor(Math.random() * (1000 - 100) + 100),
         title: ""
-      }
+      },
+      errorMsg: ''
     };
   },
   methods: {
-    saveTopic() {}
+    saveTopic() {
+      topicService.create(this.topic)
+      .then(response => {
+        if (response.status === 201) {
+          this.$router.push('/');
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          this.errorMsg = "Error adding. Response: " + error.response.statusText;
+        }
+        else if (error.request) {
+          this.errorMsg = "Error adding. Unreachable server."
+        }
+        else {
+          this.errorMsg = "Error addding. Could not create"
+        }
+      })
+    }
   }
 };
 </script>
